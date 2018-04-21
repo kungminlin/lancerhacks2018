@@ -29,7 +29,8 @@ h1, p {
 
 .top {
 	background-color: DeepSkyBlue;
-	
+	height: 8%;
+	color: white;
 }
 
 a {
