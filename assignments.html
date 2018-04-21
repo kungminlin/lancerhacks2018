@@ -10,8 +10,18 @@
 <body>
 	<h1>Assignments</h1>
 	<p id="timer"></p>
-	<form>
+	<form name="assignmentForm" action="/action_page.php" onsubmit="return processsForm()">
 		<!-- Put form content here -->
+		Enter Assignment Name:<br>
+		<input type="text" name="name" autocomplete="on">
+		<br>
+		Enter Description (optional):<br>
+		<input type="text" name="desc">
+		<br>
+		How long do you think this assignment will take? (in minutes)<br>
+		<input type="number" name="time" min="10" autocomplete="on">
+		<br><br>
+		<input type="submit" value="Submit">
 	</form>
 	<div class="assignment_list">
 		<ul>
