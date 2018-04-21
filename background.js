@@ -26,6 +26,24 @@ chrome.storage.sync.set({'accuTime': 0}, function(){
 	console.log('Accumulated time is set to ' + 0);
 })
 
+chrome.storage.sync.set({'assignments': []}, function() {
+	console.log('Assignments have been reset');
+})
+
+function addAssignment(name, desc, time) {
+	chrome.storage.sync.get(['assignments'], function(assignments) {
+		assignments.push({name: name, desc: desc, time: time});
+		chrome.storage.sync.set({'assignments': assignments}, function() {
+			console.log('Updated assignments');
+		});
+	});
+	chrome.storage.sync.get(['assignments'], function(assignments) {
+		for (var i=0; i<assignments.length; i++) {
+			console.log('assignment #' + i);
+		}
+	});
+}
+
 function addToBank(time) {
 	chrome.storage.sync.get(['accuTime'], function(currTime) {
 		chrome.storage.sync.set({'accuTime': currTime+time}, function() {
@@ -44,7 +62,7 @@ if (!window.Notification) {
 }
 
 function startTimer(time) {
-	console.log("time 	r start!");
+	console.log("timer start!");
 	var counter = time;
 	var stopwatch = setInterval(function() {
 		console.log(counter);
