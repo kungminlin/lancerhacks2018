@@ -22,10 +22,16 @@
 // 	}, assignment.time*1000);
 // }
 
-var bank;
+chrome.storage.sync.set({'accuTime': 0}, function(){
+	console.log('Accumulated time is set to ' + 0);
+})
 
 function addToBank(time) {
-	bank+=time;
+	chrome.storage.sync.get(['accuTime'], function(currTime) {
+		chrome.storage.sync.set({'accuTime': currTime+time}, function() {
+			console.log('Updated accumulated time');
+		});
+	});
 }
 
 if (!window.Notification) {
@@ -38,7 +44,7 @@ if (!window.Notification) {
 }
 
 function startTimer(time) {
-	console.log("timer start!");
+	console.log("time 	r start!");
 	var counter = time;
 	var stopwatch = setInterval(function() {
 		console.log(counter);
