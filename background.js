@@ -37,11 +37,7 @@ function addAssignment(name, desc, time) {
 			console.log('Updated assignments');
 		});
 	});
-	chrome.storage.sync.get(['assignments'], function(assignments) {
-		for (var i=0; i<assignments.length; i++) {
-			console.log('assignment #' + i);
-		}
-	});
+	updateAssignments();
 }
 
 function addToBank(time) {

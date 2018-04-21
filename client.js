@@ -14,13 +14,21 @@ function processForm() {
 	if (name=="") {
 		alert("Name must be filled out");
 		return false;
-	} else if (time==0) {
-		alert("Invalid time");
+	} else if (time<600) {
+		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
 		addAssignment(name, desc, time);
 		return true;
 	}
+}
+
+function updateAssignments() {
+	chrome.storage.sync.get(['assignments'], function(assignments) {
+		for (var i=0; i<assignments.length; i++) {
+			console.log(assignments[i].name + ": " + assignments[i].time);
+		}
+	});
 }
 
 $('#start-button').click(function() {
