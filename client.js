@@ -6,6 +6,7 @@
 // });
 
 $("#assignmentForm").submit(function() {
+	console.log("test");
 	processForm();
 	return false;
 });
@@ -21,6 +22,7 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
+		console.log("debug");
 		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}}, function(response) {
 			console.log(response.farewell);
 		});

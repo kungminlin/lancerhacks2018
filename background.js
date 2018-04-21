@@ -49,7 +49,7 @@ function addAssignment(name, desc, time) {
 			//  	console.log('Updated assignments');
 		});
 	});
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+	chrome.tabs.query({active: true}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {update_assignment: true}, function(response) {
 			console.log(response.farewell);
 		});
