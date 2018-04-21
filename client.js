@@ -18,7 +18,7 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
-		addAssignment(name, desc, time);
+		addAssignment(name, desc, time*60);
 		return true;
 	}
 }
