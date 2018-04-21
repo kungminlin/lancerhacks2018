@@ -7,10 +7,18 @@
 
 console.log("test");
 
+$("#submit").click(function() {
+	processForm();
+});
+
 function processForm() {
 	var name = document.forms["assignmentForm"]["name"].value;
 	var desc = document.forms["assignmentForm"]["desc"].value;
 	var time = document.forms["assignmentForm"]["time"].value;
+	var object = {name: name, desc: desc, time: time};
+	console.log(object.name);
+	console.log(object.desc);
+	console.log(object.time);
 	if (name=="") {
 		alert("Name must be filled out");
 		return false;
