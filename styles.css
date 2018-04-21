@@ -15,9 +15,8 @@ h1, p {
 
 footer {
 	display: block;
-	/*bottom: 10px;*/
-	/*position: absolute;*/
 	background: DeepSkyBlue;
+	overflow:auto;
 }
 
 a {
@@ -36,6 +35,7 @@ i {
 	margin: 0 auto;
 	box-sizing: border-box;
 }
+
 .button {
 	border: 1px solid black;
 	border-radius: 5px;
@@ -78,7 +78,9 @@ i {
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+	color: white;
 
+	-webkit-transition: color 1s;
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
@@ -89,6 +91,10 @@ i {
 
   /* Support for IE. */
   font-feature-settings: 'liga';
+}
+
+.material-icons:hover {
+	color: #b3ecff;
 }
 
 .add-assignment-form {
