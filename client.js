@@ -16,10 +16,6 @@ function processForm() {
 	var name = document.forms["assignmentForm"]["name"].value;
 	var desc = document.forms["assignmentForm"]["desc"].value;
 	var time = document.forms["assignmentForm"]["time"].value;
-	var object = {name: name, desc: desc, time: time};
-	console.log(object.name);
-	console.log(object.desc);
-	console.log(object.time);
 	if (name=="") {
 		alert("Name must be filled out");
 		return false;
@@ -27,10 +23,21 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
-		addAssignment(name, desc, time*60);
+		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}}, function(response) {
+			console.log(response.farewell);
+		});
 		return true;
 	}
 }
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	console.log(sender.tab ?
+		"from a content script: " + sender.tab.url :
+		"from the extension");
+	if (request.update_assignment) {
+		updateAssignments();
+	}
+});
 
 function updateAssignments() {
 	chrome.storage.sync.get(['assignments'], function(assignments) {

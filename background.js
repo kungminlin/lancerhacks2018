@@ -24,11 +24,22 @@
 
 chrome.storage.sync.set({accuTime: 0}, function(){
 	console.log('Accumulated time is set to ' + 0);
-})
+});
 
 chrome.storage.sync.set({assignments: []}, function() {
 	console.log('Assignments have been reset');
-})
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	console.log(sender.tab ?
+		"from a content script: " + sender.tab.url :
+		"from the extensions");
+	if (request.add_assignment != null) {
+		var assignment = request.add_assignment
+		addAssignment(assignment.name, assignment.desc, assignment.time);
+		sendResponse({farewell: "assignment added"});
+	}
+});
 
 function addAssignment(name, desc, time) {
 	chrome.storage.sync.get(['assignments'], function(assignments) {
@@ -37,7 +48,11 @@ function addAssignment(name, desc, time) {
 			console.log('Updated assignments');
 		});
 	});
-	updateAssignments();
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, {update_assignment: true}, function(response) {
+			console.log(response.farewell);
+		});
+	});
 }
 
 function addToBank(time) {
