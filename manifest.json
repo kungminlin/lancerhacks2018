@@ -20,7 +20,8 @@
 		"background",
 		"browsingData",
 		"storage",
-		"tabs",
+		"tabs",	
+		"notifications",
 		"webRequest",
 		"webRequestBlocking"
 	]
