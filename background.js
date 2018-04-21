@@ -22,16 +22,39 @@
 // 	}, assignment.time*1000);
 // }
 
+var bank;
+
+function addToBank(time) {
+	bank+=time;
+}
+
+if (!window.Notification) {
+	alert('Notification not supported');
+} else {
+	Notification.requestPermission(function(p) {
+		if (p === 'denied') alert('You have denied notification');
+		else if (p === 'granted') return;
+	});
+}
+
 function startTimer(time) {
 	console.log("timer start!");
 	var counter = time;
 	var stopwatch = setInterval(function() {
-		counter--;
 		console.log(counter);
 		$("#timer").html(counter);
+		if (counter <= 0) {
+			clearInterval(stopwatch);
+			var notify;
+			if (Notification.permission === 'default') {
+				alert('Notification not enabled');
+			} else {
+				notify = new Notification('Title', {
+					body: 'Description'
+				});
+			}
+		}
+		counter--;
 	}, 1000);
-	setTimeout(function() {
-		console.log("times up!");
-		chrome.notifications.create("", {"type": "basic", "iconUrl": "", "title": "Times up!", "message": "Time is up", })
-	}, time*1000);
+
 }

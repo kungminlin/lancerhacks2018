@@ -9,5 +9,5 @@ console.log("test");
 
 $('#start-button').click(function() {
 	console.log("started timer");
-	startTimer(100);
+	startTimer(10);
 });
