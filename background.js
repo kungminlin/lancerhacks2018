@@ -22,18 +22,18 @@
 // 	}, assignment.time*1000);
 // }
 
-chrome.storage.sync.set({'accuTime': 0}, function(){
+chrome.storage.sync.set({accuTime: 0}, function(){
 	console.log('Accumulated time is set to ' + 0);
 })
 
-chrome.storage.sync.set({'assignments': []}, function() {
+chrome.storage.sync.set({assignments: []}, function() {
 	console.log('Assignments have been reset');
 })
 
 function addAssignment(name, desc, time) {
 	chrome.storage.sync.get(['assignments'], function(assignments) {
-		assignments.push({name: name, desc: desc, time: time});
-		chrome.storage.sync.set({'assignments': assignments}, function() {
+		assignments.assignments.push({name: name, desc: desc, time: time});
+		chrome.storage.sync.set({'assignments': assignments.assignments}, function() {
 			console.log('Updated assignments');
 		});
 	});

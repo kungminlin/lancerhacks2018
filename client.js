@@ -7,8 +7,9 @@
 
 console.log("test");
 
-$("#submit").click(function() {
+$("#assignmentForm").submit(function() {
 	processForm();
+	return false;
 });
 
 function processForm() {
