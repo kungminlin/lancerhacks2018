@@ -97,7 +97,7 @@ i {
 	color: #b3ecff;
 }
 
-.add-assignment-form {
+.form {
 	display: block;
 	position: relative;
 	width: 80%;
@@ -129,4 +129,8 @@ i {
 
 #settings {
 	float: right;
+}
+
+#back {
+	float: left;
 }

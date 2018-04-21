@@ -11,7 +11,7 @@
 	<h1>Assignments</h1>
 	<h3 class="margin-80">Add an assignment:</h3>
 	<p id="timer"></p>
-	<form id="assignmentForm" name="assignmentForm" class="add-assignment-form">
+	<form name="assignmentForm" onsubmit="return processForm()" class="form">
 		Enter Assignment Name:
 		<input type="text" name="name" autocomplete="on" class="form-box">
 		Enter Description (optional):
@@ -26,7 +26,8 @@
 			<!-- Put assignment here -->
 		</ul>
 	</div>
-	
+
+	<script src="background.js"></script>
 	<script src="client.js"></script>
 </body>
 </html>
