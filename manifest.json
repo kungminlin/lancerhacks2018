@@ -21,7 +21,6 @@
 		"browsingData",
 		"storage",
 		"tabs",
-		"declarativeWebRequest",
 		"webRequest",
 		"webRequestBlocking"
 	]
