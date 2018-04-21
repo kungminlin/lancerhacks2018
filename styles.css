@@ -1,29 +1,44 @@
 body {
 	width: 300px;
-	height: 500px;
+	height: 400px;
+}
+
+h1, p {
+	text-align: center;
 }
 
 .button-panel {
-	display: inline-block;
-	align: center;
-	width: 90%;
+	display: block;
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+	box-sizing: border-box;
 }
 .button {
 	border: 1px solid black;
 	border-radius: 5px;
 	text-align: center;
-	text-decoration: none;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	font-size: 1.5em;
+	margin: 10 auto;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+	color: black;
 }
 
 .button:hover {
-    background-color: #4CAF50; /* Green */
+    background-color: DeepSkyBlue;
     color: white;
 }
 
 #start-button {
-	padding: 20px 60px;
+	margin-top: 50%;
+	padding-top: 40%;
+	padding-bottom: 40%;
 }
