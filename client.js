@@ -4,3 +4,7 @@ $('.button').click(function() {
      console.log(url);
    });
 });
+
+$('#start-button').click(function() {
+  startTimer(100);
+});
