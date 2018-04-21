@@ -23,13 +23,14 @@
 // }
 
 function startTimer(time) {
+	console.log("timer start!");
 	var counter = time;
 	var stopwatch = setInterval(function() {
 		counter--;
+		console.log(counter);
 		$("#timer").html(counter);
 	}, 1000);
-	$("#timer").html("")
 	setTimeout(function() {
 		alert("times up!");
-	})
+	}, time*1000);
 }
