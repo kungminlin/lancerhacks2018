@@ -24,3 +24,7 @@ body {
     background-color: #4CAF50; /* Green */
     color: white;
 }
+
+#start-button {
+	padding: 20px 60px;
+}
