@@ -13,6 +13,13 @@ h1, p {
 	text-align: center;
 }
 
+footer {
+	display: block;
+	/*bottom: 10px;*/
+	/*position: absolute;*/
+	background: DeepSkyBlue;
+}
+
 a {
 	text-decoration: none;
 	color: black;
@@ -108,7 +115,12 @@ i {
 }
 
 #start-button {
-	margin-top: 50%;
-	padding-top: 40%;
-	padding-bottom: 40%;
+}
+
+#list {
+	float: left;
+}
+
+#settings {
+	float: right;
 }
