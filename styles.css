@@ -16,7 +16,7 @@ h1, p {
 footer {
 	display: block;
 	position: relative;
-	top: 400px;
+	top: 366px;
 	background: DeepSkyBlue;
 	overflow:auto;
 }
@@ -64,7 +64,6 @@ i {
 
 .margin-80 {
 	width: 80%;
-	margin: 0 auto;
 	margin: 20px;
 }
 
