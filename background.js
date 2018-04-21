@@ -31,6 +31,7 @@ function startTimer(time) {
 		$("#timer").html(counter);
 	}, 1000);
 	setTimeout(function() {
-		alert("times up!");
+		console.log("times up!");
+		chrome.notifications.create("", {"type": "basic", "iconUrl": "", "title": "Times up!", "message": "Time is up", })
 	}, time*1000);
 }
