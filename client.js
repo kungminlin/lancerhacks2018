@@ -5,8 +5,6 @@
 //    });
 // });
 
-console.log("test");
-
 $("#assignmentForm").submit(function() {
 	processForm();
 	return false;
@@ -35,19 +33,21 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		"from a content script: " + sender.tab.url :
 		"from the extension");
 	if (request.update_assignment) {
+		console.log("assignment updated");
 		updateAssignments();
 	}
 });
 
 function updateAssignments() {
 	chrome.storage.sync.get(['assignments'], function(assignments) {
-		for (var i=0; i<assignments.length; i++) {
-			console.log(assignments[i].name + ": " + assignments[i].time);
+		for (var i=0; i<assignments.assignments.length; i++) {
+			console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
+			$("ul#assignments_list").append("<li>" + assignments.assignments[i].name + "</li>");
 		}
 	});
 }
 
-$('#start-button').click(function() {
-	console.log("started timer");
-	startTimer(10);
-});
+// $('#start-button').click(function() {
+// 	console.log("started timer");
+// 	startTimer(10);
+// });

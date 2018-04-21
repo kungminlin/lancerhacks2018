@@ -34,6 +34,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(sender.tab ?
 		"from a content script: " + sender.tab.url :
 		"from the extensions");
+	console.log("received assignment");
 	if (request.add_assignment != null) {
 		var assignment = request.add_assignment
 		addAssignment(assignment.name, assignment.desc, assignment.time);
@@ -45,7 +46,7 @@ function addAssignment(name, desc, time) {
 	chrome.storage.sync.get(['assignments'], function(assignments) {
 		assignments.assignments.push({name: name, desc: desc, time: time});
 		chrome.storage.sync.set({'assignments': assignments.assignments}, function() {
-			console.log('Updated assignments');
+			//  	console.log('Updated assignments');
 		});
 	});
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -72,7 +73,15 @@ if (!window.Notification) {
 	});
 }
 
-function startTimer(time) {
+function startStudy(time, assignmentName) {
+	startTimer(time, assignmentName + " completed!", "Please click on this notification in order to choose your next step.")
+}
+
+function startBreak(time) {
+	startTimer(300, "Break is over!", "Your " + time + " minute break is over! Blacklisted websites will now be blocked. Please choose your next assignment through the extension.")
+}
+
+function startTimer(time, title, desc) {
 	console.log("timer start!");
 	var counter = time;
 	var stopwatch = setInterval(function() {
@@ -84,9 +93,12 @@ function startTimer(time) {
 			if (Notification.permission === 'default') {
 				alert('Notification not enabled');
 			} else {
-				notify = new Notification('Title', {
-					body: 'Description'
+				notify = new Notification(title, {
+					body: desc
 				});
+				notify.onclick = function() {
+					chrome.tabs.create({url:"assignments.html"});
+				}
 			}
 		}
 		counter--;

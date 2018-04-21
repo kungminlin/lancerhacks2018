@@ -27,7 +27,9 @@
 		"tabs",	
 		"notifications",
 		"webRequest",
-		"webRequestBlocking"
+		"webRequestBlocking",
+		"<all_urls>",
+		"webNavigation"
 	]
 
 }
