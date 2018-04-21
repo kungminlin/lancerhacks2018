@@ -1,0 +1,21 @@
+{
+	"manifest_version": 2,
+	"name": "Awesome Extension 2.0",
+	"version": "2.0",
+
+	
+	"description": "Put a description here",
+	"icons": {
+
+	},
+
+	"browser_action": {
+		"default_title": "Awesome Extension 2.0",
+		"default_popup": "popup.html"
+	},
+
+	"permissions": [
+		"tabs"
+	]
+
+}
