@@ -41,19 +41,20 @@ function startTimer(time) {
 	console.log("timer start!");
 	var counter = time;
 	var stopwatch = setInterval(function() {
-		counter--;
 		console.log(counter);
 		$("#timer").html(counter);
-	}, 1000);
-	setTimeout(function() {
-		var notify;
-		if (Notification.permission === 'default') {
-			alert('Notification not enabled');
-		} else {
-			notify = new Notification('Title', {
-				body: 'Description',
-				icon: ''
-			});
+		if (counter <= 0) {
+			clearInterval(stopwatch);
+			var notify;
+			if (Notification.permission === 'default') {
+				alert('Notification not enabled');
+			} else {
+				notify = new Notification('Title', {
+					body: 'Description'
+				});
+			}
 		}
-	}, time*1000);
+		counter--;
+	}, 1000);
+
 }
