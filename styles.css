@@ -13,6 +13,15 @@ h1, p {
 	text-align: center;
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
+i {
+	margin: 5px;
+}
+
 .button-panel {
 	display: block;
 	position: relative;
@@ -39,21 +48,17 @@ h1, p {
 	color: white;
 }
 
-a {
-	text-decoration: none;
-	color: black;
-}
-
 .button:hover {
-    background-color: DeepSkyBlue;
-    color: white;
+  background-color: DeepSkyBlue;
+  color: white;
 }
 
-#start-button {
-	margin-top: 50%;
-	padding-top: 40%;
-	padding-bottom: 40%;
+.margin-80 {
+	width: 80%;
+	margin: 0 auto;
+	margin: 20px;
 }
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -79,6 +84,31 @@ a {
   font-feature-settings: 'liga';
 }
 
-i {
-	margin: 5px;
+.add-assignment-form {
+	display: block;
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.form-box {
+	display: block;
+}
+
+#form-submit-button {
+	background-color: white;
+	font-size: 1em;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+#form-submit-button:hover {
+	background-color: DeepSkyBlue;
+}
+
+#start-button {
+	margin-top: 50%;
+	padding-top: 40%;
+	padding-bottom: 40%;
 }

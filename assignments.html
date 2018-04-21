@@ -9,20 +9,18 @@
 </head>
 <body>
 	<h1>Assignments</h1>
+	<h3 class="margin-80">Add an assignment:</h3>
 	<p id="timer"></p>
-	<form name="assignmentForm">
-		<!-- Put form content here -->
-		Enter Assignment Name:<br>
-		<input type="text" name="name" autocomplete="on">
-		<br>
-		Enter Description (optional):<br>
-		<input type="text" name="desc">
-		<br>
-		How long do you think this assignment will take? (in minutes)<br>
-		<input type="number" name="time" min="10" autocomplete="on">
-		<br><br>
-		<input type="submit" id="submit" value="Submit">
+	<form name="assignmentForm" onsubmit="return processForm()" class="add-assignment-form">
+		Enter Assignment Name:
+		<input type="text" name="name" autocomplete="on" class="form-box">
+		Enter Description (optional):
+		<input type="text" name="desc" class="form-box">
+		How long do you think this assignment will take? (in minutes)
+		<input type="number" name="time" min="10" autocomplete="on" class="form-box" required>
+		<input type="submit" value="Submit" class="button form-box" id="form-submit-button">
 	</form>
+	<h3 class="margin-80">Assignment List</h3>
 	<div class="assignment_list">
 		<ul>
 			<!-- Put assignment here -->
