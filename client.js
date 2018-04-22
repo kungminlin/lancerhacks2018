@@ -5,6 +5,14 @@
 //    });
 // });
 
+chrome.storage.sync.get(['assignments'], function(assignments) {
+	for (var i=0; i<assignments.assignments.length; i++) {
+		console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
+		$("#assignment_list").append("<li>" + assignments.assignments[i].name + "</li>");
+	}
+	console.log("assignment updated");
+});
+
 $("#assignmentForm").submit(function() {
 	processForm();
 	return false;
