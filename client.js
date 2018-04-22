@@ -6,7 +6,6 @@
 // });
 
 $("#assignmentForm").submit(function() {
-	console.log("test");
 	processForm();
 	return false;
 });
@@ -22,32 +21,21 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
-		console.log("debug");
 		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}}, function(response) {
 			console.log(response.farewell);
 		});
+		$("#assignment_list").append("<li>" + name + "</li>");
 		return true;
 	}
 }
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	console.log(sender.tab ?
-		"from a content script: " + sender.tab.url :
-		"from the extension");
-	if (request.update_assignment) {
-		console.log("assignment updated");
-		updateAssignments();
-	}
-});
-
-function updateAssignments() {
-	chrome.storage.sync.get(['assignments'], function(assignments) {
-		for (var i=0; i<assignments.assignments.length; i++) {
-			console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
-			$("ul#assignments_list").append("<li>" + assignments.assignments[i].name + "</li>");
-		}
-	});
-}
+// chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+// 	console.log(sender.tab ?
+// 		"from a content script: " + sender.tab.url :
+// 		"from the extension");
+// 	console.log("assignment updated");
+// 	updateAssignments();
+// });
 
 // $('#start-button').click(function() {
 // 	console.log("started timer");

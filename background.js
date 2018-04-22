@@ -45,14 +45,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 function addAssignment(name, desc, time) {
 	chrome.storage.sync.get(['assignments'], function(assignments) {
 		assignments.assignments.push({name: name, desc: desc, time: time});
-		chrome.storage.sync.set({'assignments': assignments.assignments}, function() {
-			//  	console.log('Updated assignments');
-		});
+		chrome.storage.sync.set({'assignments': assignments.assignments});
 	});
 	chrome.tabs.query({active: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {update_assignment: true}, function(response) {
-			console.log(response.farewell);
-		});
+		chrome.tabs.sendMessage(tabs[0].id, {update_assignment: true});
 	});
 }
 
