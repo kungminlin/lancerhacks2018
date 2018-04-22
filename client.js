@@ -1,14 +1,15 @@
-// $('.button').click(function() {
-//    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabs){
-//      var url = tabs[0].url;
-//      console.log(url);
-//    });
-// });
+$(document).ready(function() {
+	$("li.assignment").click(function() {
+		console.log('assignment sent');
+		chrome.runtime.sendMessage({start_assignment: {name: $(this).children('.assignment_name').innerText, time: parseInt($(this).children('.assignment_time').innerText)}});
+	});
+});
+
 
 chrome.storage.sync.get(['assignments'], function(assignments) {
 	for (var i=0; i<assignments.assignments.length; i++) {
 		console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
-		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + assignments.assignments[i].name + "</p><p class='assignment_time'>" + assignments.assignments[i].time + "</p></li>");
+		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + assignments.assignments[i].name + "</p><p class='assignment_time'>" + assignments.assignments[i].time + " min.</p></li>");
 	}
 	console.log("assignment updated");
 });
@@ -16,11 +17,6 @@ chrome.storage.sync.get(['assignments'], function(assignments) {
 $("#assignmentForm").submit(function() {
 	processForm();
 	return false;
-});
-
-$("li.assignment").click(function() {
-	console.log('assignment sent');
-	chrome.runtime.sendMessage({start_assignment: {name: $(this).children('.assignment_name').innerText, time: parseInt($(this).children('.assignment_time').innerText)}});
 });
 
 function processForm() {
@@ -34,7 +30,7 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
-		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + name + "</p><p class='assignment_time'>" + time + "</p></li>");
+		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + name + "</p><p class='assignment_time'>" + time + " min.</p></li>");
 		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}});
 		return true;
 	}
