@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		sendResponse({farewell: "assignment added"});
 	} else if (request.start_assignment != null) {
 		var assignment = request.start_assignment
-		startStudy(parseInt(assignment.assignment_time), assignment.assignment_name);
+		startStudy(assignment.assignment_time, assignment.assignment_name);
 	}
 });
 
@@ -55,10 +55,13 @@ function startBreak(time) {
 
 function startTimer(time, title, desc) {
 	console.log("timer start!");
-	var counter = time;
+	timer = 100; 
+	title = "Mock Assignment complete!";
+	desc = "Please click on this notification in order to choose your next step.";
+	var counter = 100;
 	var stopwatch = setInterval(function() {
 		console.log(counter);
-		$("#timer").html(counter);
+		chrome.storage.sync.set({'currTime': counter});
 		if (counter <= 0) {
 			clearInterval(stopwatch);
 			var notify;
