@@ -39,7 +39,7 @@ i {
 }
 
 .button {
-	border: 1px solid black;
+	border: 1px solid rgb(169, 169, 169);
 	border-radius: 5px;
 	text-align: center;
 	padding-top: 10px;
@@ -109,6 +109,31 @@ i {
 .form-box {
 	display: block;
 }
+
+.assignment_list {
+	display: block;
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.assignment-button {
+	background-color: DeepSkyBlue;
+	color: white;
+	border-style: none;
+	radius: 5px;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+}
+
+.assignment-button:hover {
+  background-color: white;
+  color: black;
+}
+
 
 #form-submit-button {
 	background-color: white;
