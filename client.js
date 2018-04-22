@@ -8,7 +8,7 @@
 chrome.storage.sync.get(['assignments'], function(assignments) {
 	for (var i=0; i<assignments.assignments.length; i++) {
 		console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
-		$("#assignment_list").append("<li class='assignment' id='" + i + "'>" + assignments.assignments[i].name + "</li>");
+		$("#assignment_list").append("<li class='assignment'>" + assignments.assignments[i].name + "</p><p class='assignment_time'>" + assignments.assignments[i].time + "</p></li>");
 	}
 	console.log("assignment updated");
 });
@@ -18,8 +18,8 @@ $("#assignmentForm").submit(function() {
 	return false;
 });
 
-$("#startButton").click(function() {
-	chrome.runtime.sendMessage({start_assignment: true})
+$(".assignment").click(function() {
+	chrome.runtime.sendMessage({start_assignment: {this.}}})
 });
 
 function processForm() {
@@ -33,15 +33,8 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
-		$("#assignment_list").empty();
+		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + name + "</p><p class='assignment_time'>" + time + "</p></li>");
 		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}});
-		chrome.storage.sync.get(['assignments'], function(assignments) {
-			for (var i=0; i<assignments.assignments.length; i++) {
-				console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
-				$("#assignment_list").append("<li class='assignment' id='" + i + "'>" + assignments.assignments[i].name + "</li>");
-			}
-			console.log("assignment updated");
-		});
 		return true;
 	}
 }
