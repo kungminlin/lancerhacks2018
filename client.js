@@ -18,9 +18,10 @@ $("#assignmentForm").submit(function() {
 	return false;
 });
 
-// $(".assignment").click(function() {
-// 	chrome.runtime.sendMessage({start_assignment: {this.}}})
-// });
+$("li.assignment").click(function() {
+	console.log('assignment sent');
+	chrome.runtime.sendMessage({start_assignment: {name: $(this).children('.assignment_name').innerText, time: parseInt($(this).children('.assignment_time').innerText)}});
+});
 
 function processForm() {
 	var name = document.forms["assignmentForm"]["name"].value;

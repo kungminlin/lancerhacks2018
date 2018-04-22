@@ -35,8 +35,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var assignment = request.add_assignment
 		addAssignment(assignment.name, assignment.desc, assignment.time);
 		sendResponse({farewell: "assignment added"});
-	} else if (request.start_assignment) {
-		startStudy();
+	} else if (request.start_assignment != null) {
+		var assignment = request.start_assignment
+		startStudy(assignment.assignment_time, assignment.assignment_name);
 	}
 });
 
@@ -68,11 +69,12 @@ if (!window.Notification) {
 }
 
 function startStudy(time, assignmentName) {
-	startTimer(time, assignmentName + " completed!", "Please click on this notification in order to choose your next step.")
+	startTimer(time, assignmentName + " completed!", "Please click on this notification in order to choose your next step.");
+	console.log('timer start!');
 }
 
 function startBreak(time) {
-	startTimer(300, "Break is over!", "Your " + time + " minute break is over! Blacklisted websites will now be blocked. Please choose your next assignment through the extension.")
+	startTimer(300, "Break is over!", "Your " + time + " minute break is over! Blacklisted websites will now be blocked. Please choose your next assignment through the extension.");
 }
 
 function startTimer(time, title, desc) {
