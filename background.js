@@ -22,13 +22,9 @@
 // 	}, assignment.time*1000);
 // }
 
-chrome.storage.sync.set({accuTime: 0}, function(){
-	console.log('Accumulated time is set to ' + 0);
-});
-
-chrome.storage.sync.set({assignments: []}, function() {
-	console.log('Assignments have been reset');
-});
+chrome.storage.sync.set({accuTime: 0});
+chrome.storage.sync.set({assignments: []});
+chrome.storage.sync.set({currTime: 0});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(sender.tab ?
@@ -39,7 +35,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var assignment = request.add_assignment
 		addAssignment(assignment.name, assignment.desc, assignment.time);
 		sendResponse({farewell: "assignment added"});
-	}
+	} else if (request.start_assignment)
 });
 
 function addAssignment(name, desc, time) {

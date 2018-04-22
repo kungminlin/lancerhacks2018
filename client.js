@@ -8,7 +8,7 @@
 chrome.storage.sync.get(['assignments'], function(assignments) {
 	for (var i=0; i<assignments.assignments.length; i++) {
 		console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
-		$("#assignment_list").append("<li>" + assignments.assignments[i].name + "</li>");
+		$("#assignment_list").append("<li class='assignment'>" + assignments.assignments[i].name + "</li>");
 	}
 	console.log("assignment updated");
 });
@@ -16,6 +16,10 @@ chrome.storage.sync.get(['assignments'], function(assignments) {
 $("#assignmentForm").submit(function() {
 	processForm();
 	return false;
+});
+
+$("#startButton").click(function() {
+	chrome.runtime.sendMessage({add_assignment: })
 });
 
 function processForm() {
