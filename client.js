@@ -18,9 +18,9 @@ $("#assignmentForm").submit(function() {
 	return false;
 });
 
-$(".assignment").click(function() {
-	chrome.runtime.sendMessage({start_assignment: {this.}}})
-});
+// $(".assignment").click(function() {
+// 	chrome.runtime.sendMessage({start_assignment: {this.}}})
+// });
 
 function processForm() {
 	var name = document.forms["assignmentForm"]["name"].value;
