@@ -3,14 +3,15 @@
 <head>
 	<title>Assignments</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 	<script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<h1>Assignments</h1>
 	<h3 class="margin-80">Add an assignment:</h3>
 	<p id="timer"></p>
-	<form name="assignmentForm" id="assignmentForm" class="form">
+	<form name="assignmentForm" onsubmit="return processForm()" class="form">
 		Enter Assignment Name:
 		<input type="text" name="name" autocomplete="on" class="form-box">
 		Enter Description (optional):
@@ -19,17 +20,15 @@
 		<input type="number" name="time" min="10" autocomplete="on" class="form-box" required>
 		<input type="submit" value="Submit" class="button form-box" id="form-submit-button">
 	</form>
-	<h3 class="margin-80">Assignment List</h3>
-	<div class="assignment_list">
+	<h3 class="margin-80 assignment_list">Assignment List</h3>
 		<ul id="assignment_list">
-			<!-- Put assignment here -->
 		</ul>
 	</div>
-	<footer style="">
+	<footer>
 		<a href="main.html"><i class="material-icons" id="back">keyboard_arrow_left</i></a>
 		<a href="settings.html"><i class="material-icons" id="settings">settings</i></a>
 	</footer>
-
+	<script src="background.js"></script>
 	<script src="client.js"></script>
 </body>
 </html>
