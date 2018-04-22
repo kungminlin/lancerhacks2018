@@ -29,7 +29,7 @@ function processForm() {
 	if (name=="") {
 		alert("Name must be filled out");
 		return false;
-	} else if (time<600) {
+	} else if (time<10) {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
