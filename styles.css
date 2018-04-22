@@ -110,28 +110,21 @@ i {
 	display: block;
 }
 
-.assignment_list {
-	display: block;
-	position: relative;
-	width: 80%;
-	margin: 0 auto;
-	box-sizing: border-box;
+.assignment_list  ul {
+	list-style-type: none;
+	padding: 20px;
 }
-
-.assignment-button {
-	background-color: DeepSkyBlue;
-	color: white;
+.assignment_list li {
 	border-style: none;
-	radius: 5px;
-	text-align: left;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	box-sizing: border-box;
+	border-radius:4px;
+	background: white;
+	margin: 5px;
+	padding: 5px 10px;
 }
 
-.assignment-button:hover {
-  background-color: white;
-  color: black;
+.assignment_list li:hover {
+  background-color: DeepSkyBlue;
+  color: white;
 }
 
 
