@@ -19,7 +19,7 @@ $("#assignmentForm").submit(function() {
 });
 
 $("#startButton").click(function() {
-	chrome.runtime.sendMessage({add_assignment: })
+	chrome.runtime.sendMessage({start_assignment: true})
 });
 
 function processForm() {
@@ -33,9 +33,7 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
-		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}}, function(response) {
-			console.log(response.farewell);
-		});
+		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}});
 		$("#assignment_list").append("<li>" + name + "</li>");
 		return true;
 	}
