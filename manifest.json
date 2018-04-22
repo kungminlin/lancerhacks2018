@@ -1,16 +1,16 @@
 {
 	"manifest_version": 2,
-	"name": "Clockwork PlanIt!",
+	"name": "Awesome Extension 2.0",
 	"version": "2.0",
 
 	
-	"description": "An easy-to-use work planner with a timer",
+	"description": "Put a description here",
 	"icons": {
 		"512": "icons/alarm.png"
 	},
 
 	"browser_action": {
-		"default_title": "Clockwork PlanIt!",
+		"default_title": "Awesome Extension 2.0",
 		"default_popup": "main.html"	
 	},
 

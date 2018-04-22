@@ -1,15 +1,10 @@
 $(document).ready(function() {
-	$(document).on("click", "li.assignment", function() {
-		console.log(parseInt($(this).children('.assignment_time')[0].innerText));
-		chrome.runtime.sendMessage({start_assignment: {name: $(this).children('.assignment_name')[0].innerText, time: parseInt($(this).children('.assignment_time')[0].innerText)}});
+	$("li.assignment").click(function() {
+		console.log('assignment sent');
+		chrome.runtime.sendMessage({start_assignment: {name: $(this).children('.assignment_name').innerText, time: parseInt($(this).children('.assignment_time').innerText)}});
 	});
 });
 
-var stopwatch = setInterval(function() {
-	chrome.storage.sync.get(['currTime'], function(time) {
-		$('#timer').html(time.currTime);
-	});
-}, 100);
 
 chrome.storage.sync.get(['assignments'], function(assignments) {
 	for (var i=0; i<assignments.assignments.length; i++) {
