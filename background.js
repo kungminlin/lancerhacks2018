@@ -35,7 +35,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var assignment = request.add_assignment
 		addAssignment(assignment.name, assignment.desc, assignment.time);
 		sendResponse({farewell: "assignment added"});
-	} else if (request.start_assignment)
+	} else if (request.start_assignment) {
+		startStudy();
+	}
 });
 
 function addAssignment(name, desc, time) {

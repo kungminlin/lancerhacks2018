@@ -8,7 +8,7 @@
 chrome.storage.sync.get(['assignments'], function(assignments) {
 	for (var i=0; i<assignments.assignments.length; i++) {
 		console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
-		$("#assignment_list").append("<li class='assignment'>" + assignments.assignments[i].name + "</li>");
+		$("#assignment_list").append("<li class='assignment' id='" + i + "'>" + assignments.assignments[i].name + "</li>");
 	}
 	console.log("assignment updated");
 });
@@ -33,8 +33,15 @@ function processForm() {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {
+		$("#assignment_list").empty();
 		chrome.runtime.sendMessage({add_assignment: {name: name, desc: desc, time: time*60}});
-		$("#assignment_list").append("<li>" + name + "</li>");
+		chrome.storage.sync.get(['assignments'], function(assignments) {
+			for (var i=0; i<assignments.assignments.length; i++) {
+				console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
+				$("#assignment_list").append("<li class='assignment' id='" + i + "'>" + assignments.assignments[i].name + "</li>");
+			}
+			console.log("assignment updated");
+		});
 		return true;
 	}
 }
