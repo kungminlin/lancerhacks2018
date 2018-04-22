@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
-	"name": "Awesome Extension 2.0",
+	"name": "Clockwork PlanIt",
 	"version": "2.0",
 
 	
-	"description": "Put a description here",
+	"description": "Description",
 	"icons": {
 		"512": "icons/alarm.png"
 	},
