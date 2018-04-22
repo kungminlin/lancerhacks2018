@@ -35,9 +35,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var assignment = request.add_assignment
 		addAssignment(assignment.name, assignment.desc, assignment.time);
 		sendResponse({farewell: "assignment added"});
-	} else if (request.start_assignment != null) {
-		var assignment = request.start_assignment
-		startStudy(parseInt(assignment.assignment_time), assignment.assignment_name);
+	} else if (request.start_assignment != null && request.start_assignment.assignment_time != NaN) {
+		var assignment = request.start_assignment;
+		console.log(assignment.assignment_time);
+		startStudy(assignment.assignment_time, assignment.assignment_name);
 	}
 });
 
@@ -53,7 +54,7 @@ function addAssignment(name, desc, time) {
 
 function addToBank(time) {
 	chrome.storage.sync.get(['accuTime'], function(currTime) {
-		chrome.storage.sync.set({'accuTime': currTime+time}, function() {
+		chrome.storage.sync.set({'accuTime': currTime.accuTime+time}, function() {
 			console.log('Updated accumulated time');
 		});
 	});
@@ -69,8 +70,8 @@ if (!window.Notification) {
 }
 
 function startStudy(time, assignmentName) {
+	console.log(time);
 	startTimer(time, assignmentName + " completed!", "Please click on this notification in order to choose your next step.");
-	console.log('timer start!');
 }
 
 function startBreak(time) {
@@ -78,11 +79,13 @@ function startBreak(time) {
 }
 
 function startTimer(time, title, desc) {
-	console.log("timer start!");
+	time = 100;
+	title = "Mock Assignment completed!";
+	desc = "Please click on this notification in order to choose your next step.";
 	var counter = time;
 	var stopwatch = setInterval(function() {
 		console.log(counter);
-		$("#timer").html(counter);
+		chrome.storage.sync.set({currTime: counter});
 		if (counter <= 0) {
 			clearInterval(stopwatch);
 			var notify;
