@@ -5,9 +5,15 @@ $(document).ready(function() {
 	});
 });
 
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
 var stopwatch = setInterval(function() {
 	chrome.storage.sync.get(['currTime'], function(time) {
-		$('#timer').html(time.currTime);
+		$('#timer').html(pad(Math.floor(time.currTime/360),2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2));
 	});
 }, 100);
 
