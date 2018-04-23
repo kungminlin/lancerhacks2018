@@ -40,7 +40,7 @@ var stopwatch = setInterval(function() {
 chrome.storage.local.get(['assignments'], function(assignments) {
 	for (var i=0; i<assignments.assignments.length; i++) {
 		console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
-		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + assignments.assignments[i].name + "</p><p class='assignment_time'>" + assignments.assignments[i].time + " min.</p></li>");
+		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + assignments.assignments[i].name + "</p><p class='assignment_time'>" + assignments.assignments[i].time/60 + " min.</p></li>");
 	}
 	console.log("assignment updated");
 }); 

@@ -26,7 +26,7 @@ function addAssignment(name, desc, time) {
 	});
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		console.log("test");
-	  chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {});
+	 	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {});
 	});
 }
 
