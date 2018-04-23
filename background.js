@@ -16,8 +16,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 });
 
-
-
 function addAssignment(name, desc, time) {
 	chrome.storage.local.get(['assignments'], function(assignments) {
 		assignments.assignments.push({name: name, desc: desc, time: time});
@@ -60,8 +58,10 @@ function startBreak(time) {
 function startTimer(time, title, desc) {
 	var counter = time*60;
 	var stopwatch = setInterval(function() {
-		console.log(counter);
 		chrome.storage.local.set({'currTime': counter});
+		var timeStr = pad(Math.floor(counter/3600)%60,2) + " : " + pad(Math.floor(counter/60)%60,2) + " : " + pad(counter%60,2);
+		console.log(timeStr);
+		chrome.browserAction.setTitle({title: timeStr});
 		if (counter <= 0) {
 			clearInterval(stopwatch);
 			var notify;
@@ -79,4 +79,10 @@ function startTimer(time, title, desc) {
 		counter--;
 	}, 1000);
 
+}
+
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }

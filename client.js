@@ -32,7 +32,6 @@ var stopwatch = setInterval(function() {
 	chrome.storage.local.get(['currTime'], function(time) {
 		var timerStr = pad(Math.floor(time.currTime/3600)%60,2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2);
 		$('#timer').html(timerStr);
-		chrome.browserAction.setTitle({title: timerStr});
 		if (time.currTime <= 0) timing = false;
 		else timing = true;
 	});
