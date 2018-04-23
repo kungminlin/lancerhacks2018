@@ -1,6 +1,6 @@
-chrome.storage.sync.set({accuTime: 0});
-chrome.storage.sync.set({assignments: []});
-chrome.storage.sync.set({currTime: 0});
+chrome.storage.local.set({accuTime: 0});
+chrome.storage.local.set({assignments: []});
+chrome.storage.local.set({currTime: 0});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(sender.tab ?
@@ -16,19 +16,25 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 });
 
+
+
 function addAssignment(name, desc, time) {
-	chrome.storage.sync.get(['assignments'], function(assignments) {
+	chrome.storage.local.get(['assignments'], function(assignments) {
 		assignments.assignments.push({name: name, desc: desc, time: time});
-		chrome.storage.sync.set({'assignments': assignments.assignments});
+		chrome.storage.local.set({'assignments': assignments.assignments});
 	});
 	chrome.tabs.query({active: true}, function(tabs) {
 		chrome.tabs.sendMessage(tabs[0].id, {update_assignment: true});
 	});
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		console.log("test");
+	  chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {});
+	});
 }
 
 function addToBank(time) {
-	chrome.storage.sync.get(['accuTime'], function(currTime) {
-		chrome.storage.sync.set({'accuTime': currTime+time}, function() {
+	chrome.storage.local.get(['accuTime'], function(currTime) {
+		chrome.storage.local.set({'accuTime': currTime+time}, function() {
 			console.log('Updated accumulated time');
 		});
 	});
@@ -55,7 +61,7 @@ function startTimer(time, title, desc) {
 	var counter = time*60;
 	var stopwatch = setInterval(function() {
 		console.log(counter);
-		chrome.storage.sync.set({'currTime': counter});
+		chrome.storage.local.set({'currTime': counter});
 		if (counter <= 0) {
 			clearInterval(stopwatch);
 			var notify;

@@ -10,7 +10,7 @@
 	},
 
 	"browser_action": {
-		"default_title": "Awesome Extension 2.0",
+		"default_title": "Clockwork PlanIt",
 		"default_popup": "main.html"	
 	},
 

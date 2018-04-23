@@ -11,6 +11,17 @@ $(document).ready(function() {
 	});
 });
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+    if (request.greeting == "hello") {
+      console.log("messaged!");
+      sendResponse({farewell: "goodbye"});
+    }
+  });
+
 function pad(n, width, z) {
   z = z || '0';
   n = n + '';
@@ -18,14 +29,16 @@ function pad(n, width, z) {
 }
 
 var stopwatch = setInterval(function() {
-	chrome.storage.sync.get(['currTime'], function(time) {
-		$('#timer').html(pad(Math.floor(time.currTime/3600)%60,2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2));
+	chrome.storage.local.get(['currTime'], function(time) {
+		var timerStr = pad(Math.floor(time.currTime/3600)%60,2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2);
+		$('#timer').html(timerStr);
+		chrome.browserAction.setTitle({title: timerStr});
 		if (time.currTime <= 0) timing = false;
 		else timing = true;
 	});
 }, 100);
 
-chrome.storage.sync.get(['assignments'], function(assignments) {
+chrome.storage.local.get(['assignments'], function(assignments) {
 	for (var i=0; i<assignments.assignments.length; i++) {
 		console.log(assignments.assignments[i].name + ": " + assignments.assignments[i].time);
 		$("#assignment_list").append("<li class='assignment'><p class='assignment_name'>" + assignments.assignments[i].name + "</p><p class='assignment_time'>" + assignments.assignments[i].time + " min.</p></li>");
