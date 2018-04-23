@@ -6,14 +6,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(sender.tab ?
 		"from a content script: " + sender.tab.url :
 		"from the extensions");
-	console.log("received assignment");
 	if (request.add_assignment != null) {
 		var assignment = request.add_assignment
 		addAssignment(assignment.name, assignment.desc, assignment.time);
 		sendResponse({farewell: "assignment added"});
-	} else if (request.start_assignment != null) {
-		var assignment = request.start_assignment
-		startStudy(assignment.assignment_time, assignment.assignment_name);
+	} else if (Number.isInteger(request.start_assignment.time)) {
+		var assignment = request.start_assignment;
+		startStudy(assignment.time, assignment.name);
 	}
 });
 
@@ -46,7 +45,6 @@ if (!window.Notification) {
 
 function startStudy(time, assignmentName) {
 	startTimer(time, assignmentName + " completed!", "Please click on this notification in order to choose your next step.");
-	console.log('timer start!');
 }
 
 function startBreak(time) {
@@ -54,11 +52,7 @@ function startBreak(time) {
 }
 
 function startTimer(time, title, desc) {
-	console.log("timer start!");
-	timer = 100; 
-	title = "Mock Assignment complete!";
-	desc = "Please click on this notification in order to choose your next step.";
-	var counter = 100;
+	var counter = time*60;
 	var stopwatch = setInterval(function() {
 		console.log(counter);
 		chrome.storage.sync.set({'currTime': counter});

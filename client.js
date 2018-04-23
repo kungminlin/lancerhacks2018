@@ -1,7 +1,13 @@
+var timing = false;
+
 $(document).ready(function() {
 	$(document).on("click", "li.assignment", function() {
-		console.log(parseInt($(this).children('.assignment_time')[0].innerText));
-		chrome.runtime.sendMessage({start_assignment: {name: $(this).children('.assignment_name')[0].innerText, time: parseInt($(this).children('.assignment_time')[0].innerText)}});
+		if (!timing) {
+			console.log(parseInt($(this).children('.assignment_time')[0].innerText));
+			chrome.runtime.sendMessage({start_assignment: {name: $(this).children('.assignment_name')[0].innerText, time: parseInt($(this).children('.assignment_time')[0].innerText)}});
+		} else {
+			//alert("still timing!");
+		}
 	});
 });
 
@@ -13,7 +19,9 @@ function pad(n, width, z) {
 
 var stopwatch = setInterval(function() {
 	chrome.storage.sync.get(['currTime'], function(time) {
-		$('#timer').html(pad(Math.floor(time.currTime/360),2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2));
+		$('#timer').html(pad(Math.floor(time.currTime/3600)%60,2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2));
+		if (time.currTime <= 0) timing = false;
+		else timing = true;
 	});
 }, 100);
 
