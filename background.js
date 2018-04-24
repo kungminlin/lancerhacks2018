@@ -1,6 +1,7 @@
 chrome.storage.local.set({accuTime: 0});
 chrome.storage.local.set({assignments: []});
 chrome.storage.local.set({currTime: 0});
+chrome.storage.sync.set({blacklist: []});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(sender.tab ?
@@ -27,6 +28,13 @@ function addAssignment(name, desc, time) {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 		console.log("test");
 	 	chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {});
+	});
+}
+
+function addURL(name, link) {
+	chrome.storage.sync.get(['blacklist'], function(blacklist) {
+		blacklist.blacklist.push({name: name, url: link});
+		chrome.storage.sync.set({'blacklist': blacklist.blacklist});
 	});
 }
 

@@ -10,10 +10,10 @@
   	<h1>Settings</h1>
 	<h3 class="margin-80">Blacklist (websites I cannot visit while studying):</h3>
 	<p id="timer"></p>
-	<form name="blacklistForm" onsubmit="return processForm()" class="form">
+	<form id="blacklistForm" name="blacklistForm" class="form">
 		Add to Blacklist:
-		<input input type="url" name="website" class="form-box">
-		<input type="submit" value="Add" class="button form-box" id="form-submit-button">
+		<input type="url" name="website" class="form-box">
+		<input type="submit" name="submit" value="Add" class="button form-box" id="form-submit-button">
 	</form>
 	<div class="website_list">
 		<ul>

@@ -46,11 +46,11 @@ chrome.storage.local.get(['assignments'], function(assignments) {
 }); 
 
 $("#assignmentForm").submit(function() {
-	processForm();
+	processAssignment();
 	return false;
 });
 
-function processForm() {
+function processAssignment() {
 	var name = document.forms["assignmentForm"]["name"].value;
 	var desc = document.forms["assignmentForm"]["desc"].value;
 	var time = document.forms["assignmentForm"]["time"].value;
