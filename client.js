@@ -14,13 +14,13 @@ $(document).ready(function() {
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
+        "from a content script:" + sender.tab.url :
+        "from the extension");
     if (request.greeting == "hello") {
-      console.log("messaged!");
-      sendResponse({farewell: "goodbye"});
+      	console.log("messaged!");
+      	sendResponse({farewell: "goodbye"});
     }
-  });
+});
 
 function pad(n, width, z) {
   z = z || '0';

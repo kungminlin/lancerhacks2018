@@ -2,6 +2,7 @@ chrome.storage.local.set({accuTime: 0});
 chrome.storage.local.set({assignments: []});
 chrome.storage.local.set({currTime: 0});
 chrome.storage.sync.set({blacklist: []});
+var blockedSites = [];
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(sender.tab ?
@@ -39,7 +40,19 @@ function addURL(name, link) {
 	chrome.storage.sync.get(['blacklist'], function(blacklist) {
 		blacklist.blacklist.push({name: name, link: link});
 		chrome.storage.sync.set({'blacklist': blacklist.blacklist});
+		blockedSites = [];
+		for (var i=0; i<blacklist.blacklist.length; i++) {
+			blockedSites.push(processURL(blacklist.blacklist[i].link));
+		}
 	});
+}
+
+function processURL(link) {
+	for (var i=0; i<link.length; i++) {
+		if (link.charAt(i)==":") link = '*' + link.substring(i, link.length);
+	}
+	link = link + "/*";
+	return link;
 }
 
 function addToBank(time) {
@@ -74,6 +87,18 @@ function startTimer(time, title, desc) {
 		var timeStr = pad(Math.floor(counter/3600)%60,2) + " : " + pad(Math.floor(counter/60)%60,2) + " : " + pad(counter%60,2);
 		console.log(timeStr);
 		chrome.browserAction.setTitle({title: timeStr});
+		if (blockedSites.length > 0) {
+			console.log(blockedSites);
+			chrome.webRequest.onBeforeRequest.addListener(
+			    function(details) { 
+			    	console.log("page blocked");
+			    	return {cancel: true}; 
+			    },
+			    {urls: blockedSites},
+			    ["blocking"]
+			);
+			
+		}
 		if (counter <= 0) {
 			clearInterval(stopwatch);
 			var notify;
