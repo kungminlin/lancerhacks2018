@@ -11,9 +11,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var assignment = request.add_assignment
 		addAssignment(assignment.name, assignment.desc, assignment.time);
 		sendResponse({farewell: "assignment added"});
-	} else if (Number.isInteger(request.start_assignment.time)) {
+	} else if (request.start_assignment != null && Number.isInteger(request.start_assignment.time) && request.start_assignment.name != "") {
 		var assignment = request.start_assignment;
 		startStudy(assignment.time, assignment.name);
+	} else if (request.add_website.name != "") {
+		var website = request.add_website;
+		addURL(website.name, website.link);
+		sendResponse({farewell: "website added"});
 	}
 });
 

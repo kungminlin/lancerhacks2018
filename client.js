@@ -45,10 +45,22 @@ chrome.storage.local.get(['assignments'], function(assignments) {
 	console.log("assignment updated");
 }); 
 
+chrome.storage.sync.get(['blacklist'], function(blacklist) {
+	for (var i=0; i<blacklist.blacklist.length; i++) {
+		$("#website_list").append("<li class='website'><p class='website_name'>" + blacklist.blacklist[i].name + "</p><p class='website_link'>" + blacklist.blacklist[i].link + "</p></li>");
+	}
+	console.log("blacklist updated");
+})
+
 $("#assignmentForm").submit(function() {
 	processAssignment();
 	return false;
 });
+
+$("#blacklistForm").submit(function() {
+	processLink();
+	return false;
+})
 
 function processAssignment() {
 	var name = document.forms["assignmentForm"]["name"].value;
@@ -74,8 +86,9 @@ function processLink() {
 		alert("Please input website link");
 		return false;
 	} else {
-		$("#website_list").append("<li class='website'><p class='website_name'>" + name + "</p><p class='website_link'>" + link + " min.</p></li>");
+		$("#website_list").append("<li class='website'><p class='website_name'>" + name + "</p><p class='website_link'>" + link + "</p></li>");
 		chrome.runtime.sendMessage({add_website: {name: name, link: link}});
+		console.log("website added");
 		return true;
 	}
 }
