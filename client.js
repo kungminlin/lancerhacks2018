@@ -67,6 +67,19 @@ function processAssignment() {
 	}
 }
 
+function processLink() {
+	var name = document.forms["blacklistForm"]["name"].value;
+	var link = document.forms["blacklistForm"]["website"].value;
+	if (link=="") {
+		alert("Please input website link");
+		return false;
+	} else {
+		$("#website_list").append("<li class='website'><p class='website_name'>" + name + "</p><p class='website_link'>" + link + " min.</p></li>");
+		chrome.runtime.sendMessage({add_website: {name: name, link: link}});
+		return true;
+	}
+}
+
 // chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 // 	console.log(sender.tab ?
 // 		"from a content script: " + sender.tab.url :

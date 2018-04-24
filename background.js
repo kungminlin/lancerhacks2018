@@ -33,7 +33,7 @@ function addAssignment(name, desc, time) {
 
 function addURL(name, link) {
 	chrome.storage.sync.get(['blacklist'], function(blacklist) {
-		blacklist.blacklist.push({name: name, url: link});
+		blacklist.blacklist.push({name: name, link: link});
 		chrome.storage.sync.set({'blacklist': blacklist.blacklist});
 	});
 }
