@@ -118,13 +118,14 @@ i {
 	box-sizing: border-box;
 
 }
+
 .assignment {
 	list-style-type: none;
 	width: 90%;
 	border: 1px solid rgb(169, 169, 169);
 	border-radius:4px;
 	margin: 5px;
-	padding: 5px;
+	padding: 5px 5px;
 	box-sizing: border-box;
 
 }
@@ -140,6 +141,17 @@ i {
 
 .assignment_time {
 	text-align: right;
+}
+
+.website {
+	list-style-type: none;
+	width: 90%;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius:4px;
+	margin: 5px;
+	padding: 5px 5px;;
+	box-sizing: border-box;
+
 }
 
 #form-submit-button {
