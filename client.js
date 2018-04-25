@@ -1,7 +1,6 @@
+// Preloading Variables/Functions
 var timing = false;
-
 updateAssignments();
-
 $(document).ready(function() {
 	$(document).on("click", "li.assignment", function() {
 		if (!timing) {
@@ -11,6 +10,26 @@ $(document).ready(function() {
 	});
 });
 
+// Update URL Blacklist
+chrome.storage.sync.get(['blacklist'], function(blacklist) {
+	for (var i=0; i<blacklist.blacklist.length; i++) {
+		$("#website_list").append("<li class='website'><p class='website_name'>" + blacklist.blacklist[i].name + "</p><p class='website_link'>" + blacklist.blacklist[i].link + "</p></li>");
+	}
+	console.log("blacklist updated");
+})
+
+// Check for Form Submission
+$("#assignmentForm").submit(function() {
+	processAssignment();
+	return false;
+});
+
+$("#blacklistForm").submit(function() {
+	processLink();
+	return false;
+})
+
+// Message Listener
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
@@ -22,23 +41,12 @@ chrome.runtime.onMessage.addListener(
     }
 });
 
+// Helper Functions
 function pad(n, width, z) {
   z = z || '0';
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
-
-var stopwatch = setInterval(function() {
-	chrome.storage.local.get(['currTime'], function(time) {
-		var timerStr = pad(Math.floor(time.currTime/3600)%60,2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2);
-		$('#timer').html(timerStr);
-		if (time.currTime <= 0) {
-			timing = false;
-		}
-		else timing = true;
-	});
-}, 100);
-
 function updateAssignments() {
 	chrome.storage.local.get(['assignments'], function(assignments) {
 		$("#assignment_list").empty();
@@ -47,24 +55,18 @@ function updateAssignments() {
 		}
 	}); 
 }
-	
-chrome.storage.sync.get(['blacklist'], function(blacklist) {
-	for (var i=0; i<blacklist.blacklist.length; i++) {
-		$("#website_list").append("<li class='website'><p class='website_name'>" + blacklist.blacklist[i].name + "</p><p class='website_link'>" + blacklist.blacklist[i].link + "</p></li>");
-	}
-	console.log("blacklist updated");
-})
 
-$("#assignmentForm").submit(function() {
-	processAssignment();
-	return false;
-});
+// Constantly Loading Functions
+var stopwatch = setInterval(function() {
+	chrome.storage.local.get(['currTime'], function(time) {
+		var timerStr = pad(Math.floor(time.currTime/3600)%60,2) + " : " + pad(Math.floor(time.currTime/60)%60,2) + " : " + pad(time.currTime%60,2);
+		$('#timer').html(timerStr);
+		if (time.currTime <= 0) timing = false;
+		else timing = true;
+	});
+}, 100);
 
-$("#blacklistForm").submit(function() {
-	processLink();
-	return false;
-})
-
+// Form Processing Functions
 function processAssignment() {
 	var name = document.forms["assignmentForm"]["name"].value;
 	var desc = document.forms["assignmentForm"]["desc"].value;
@@ -82,7 +84,6 @@ function processAssignment() {
 		return true;
 	}
 }
-
 function processLink() {
 	var name = document.forms["blacklistForm"]["name"].value;
 	var link = document.forms["blacklistForm"]["website"].value;
