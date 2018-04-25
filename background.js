@@ -85,7 +85,7 @@ var blockURL = function(details) {
 }
 
 function startTimer(time, title, desc) {
-	var counter = time;
+	var counter = time*60;
 	if (blockedSites.length > 0) {
 		console.log(blockedSites);
 		chrome.webRequest.onBeforeRequest.addListener(
