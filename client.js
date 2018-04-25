@@ -44,7 +44,7 @@ chrome.storage.local.get(['assignments'], function(assignments) {
 	}
 	console.log("assignment updated");
 }); 
-
+	
 chrome.storage.sync.get(['blacklist'], function(blacklist) {
 	for (var i=0; i<blacklist.blacklist.length; i++) {
 		$("#website_list").append("<li class='website'><p class='website_name'>" + blacklist.blacklist[i].name + "</p><p class='website_link'>" + blacklist.blacklist[i].link + "</p></li>");
@@ -69,7 +69,7 @@ function processAssignment() {
 	if (name=="") {
 		alert("Name must be filled out");
 		return false;
-	} else if (time<10) {
+	} else if (time<=0) {
 		alert("The time must be a value above 10 minutes");
 		return false;
 	} else {

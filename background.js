@@ -80,26 +80,28 @@ function startBreak(time) {
 	startTimer(300, "Break is over!", "Your " + time + " minute break is over! Blacklisted websites will now be blocked. Please choose your next assignment through the extension.");
 }
 
+var blockURL = function(details) {
+	return {cancel: true};
+}
+
 function startTimer(time, title, desc) {
-	var counter = time*60;
+	var counter = time;
+	if (blockedSites.length > 0) {
+		console.log(blockedSites);
+		chrome.webRequest.onBeforeRequest.addListener(
+		    blockURL,
+		    {urls: blockedSites},
+		    ["blocking"]
+		);
+		
+	}
 	var stopwatch = setInterval(function() {
 		chrome.storage.local.set({'currTime': counter});
 		var timeStr = pad(Math.floor(counter/3600)%60,2) + " : " + pad(Math.floor(counter/60)%60,2) + " : " + pad(counter%60,2);
 		console.log(timeStr);
 		chrome.browserAction.setTitle({title: timeStr});
-		if (blockedSites.length > 0) {
-			console.log(blockedSites);
-			chrome.webRequest.onBeforeRequest.addListener(
-			    function(details) { 
-			    	console.log("page blocked");
-			    	return {cancel: true}; 
-			    },
-			    {urls: blockedSites},
-			    ["blocking"]
-			);
-			
-		}
 		if (counter <= 0) {
+			chrome.webRequest.onBeforeRequest.removeListener(blockURL);
 			clearInterval(stopwatch);
 			var notify;
 			if (Notification.permission === 'default') {
