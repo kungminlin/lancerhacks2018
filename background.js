@@ -4,6 +4,13 @@ chrome.storage.local.set({currTime: 0});
 chrome.storage.sync.set({blacklist: []});
 var blockedSites = [];
 
+// Timer Formatting
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
 // Message Listener
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(sender.tab ?
