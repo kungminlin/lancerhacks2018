@@ -9,19 +9,19 @@
 </head>
 <body>
 	<h1>Assignments</h1>
-	<h3 class="margin-80">Add an assignment:</h3>
 	<p id="timer"></p>
+	<h3 class="margin-80">Assignments (things I need to complete):</h3>
 	<form id="assignmentForm" name="assignmentForm" class="form">
-		Enter Assignment Name:
-		<input type="text" name="name" autocomqplete="on" class="form-box">
+		Add an Assignment:
+		<input type="text" name="name" autocomqplete="on" class="form-box" placeholder="Assignment Name">
 		Enter Description (optional):
 		<input type="text" name="desc" class="form-box">
 		How long do you think this assignment will take? (in minutes)
 		<input type="number" name="time" min="10" autocomplete="on" class="form-box" placeholder="minimum of 10 min." required>
 		<input type="submit" value="Add" class="button form-box" id="form-submit-button">
 	</form>
-	<div><h3 class="margin-80 assignment_list">Assignment List</h3>
-		<ul id="assignment_list">
+	<div class="item-list">
+		<ul id="assignment_list" class="list">
 		</ul>
 	</div>
 	<footer>

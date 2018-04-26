@@ -65,7 +65,7 @@ i {
 
 .margin-80 {
 	width: 80%;
-	margin: 20px;
+	margin: 20px auto;
 }
 
 .material-icons {
@@ -118,6 +118,10 @@ input[type=text]:focus {
     border-color: #b3ecff;
 }
 
+.list {
+	padding: 0px;
+}
+
 .assignment-ul {
 	display: block;
 	margin: 0 auto;
@@ -127,15 +131,15 @@ input[type=text]:focus {
 
 }
 
-.assignment {
+.assignment, .website {
 	list-style-type: none;
-	width: 90%;
+	display: block;
+	width: 80%;
 	border: 1px solid rgb(169, 169, 169);
 	border-radius:4px;
-	margin: 5px;
-	padding: 5px 5px;
+	margin: 0px auto 10px;
+	padding: 5px 10px;
 	box-sizing: border-box;
-
 }
 
 .assignment:hover {
@@ -149,17 +153,6 @@ input[type=text]:focus {
 
 .assignment_time {
 	text-align: right;
-}
-
-.website {
-	list-style-type: none;
-	width: 90%;
-	border: 1px solid rgb(169, 169, 169);
-	border-radius:4px;
-	margin: 5px;
-	padding: 5px 5px;;
-	box-sizing: border-box;
-
 }
 
 #form-submit-button {
