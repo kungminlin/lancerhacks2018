@@ -180,3 +180,9 @@ input[type=text]:focus {
 #back {
 	float: left;
 }
+
+#timer {
+	font-size: 40px;
+	margin: 20px;
+	text-shadow: 4px 3px 10px grey;
+}
