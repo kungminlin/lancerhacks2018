@@ -153,11 +153,17 @@ input[type=text]:focus {
 }
 
 .assignment_name {
-	text-align: left;
+	float: left;
 }
 
 .assignment_time {
 	text-align: right;
+}
+
+#close {
+	float: right;
+	height: auto;
+	width: auto;
 }
 
 #form-submit-button {
